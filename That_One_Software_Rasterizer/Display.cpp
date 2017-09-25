@@ -8,8 +8,11 @@
 
 Display* g_NotGreatDisplay;
 
-void Display::CreateDevice(void* hwnd)
+void Display::CreateDevice(void* hwnd, uint32_t swapWidth, uint32_t swapHeight)
 {
+	m_SwapWidth = swapWidth;
+	m_SwapHeight = swapHeight;
+
 	g_NotGreatDisplay = this;
 
 	UINT createDeviceFlags = 0;
@@ -59,8 +62,8 @@ void Display::CreateDevice(void* hwnd)
 	DXGI_SWAP_CHAIN_DESC SwapChainDesc;
 
 	SwapChainDesc.Windowed = true;
-	SwapChainDesc.BufferDesc.Width = m_Width;
-	SwapChainDesc.BufferDesc.Height = m_Height;
+	SwapChainDesc.BufferDesc.Width = m_SwapWidth;
+	SwapChainDesc.BufferDesc.Height = m_SwapHeight;
 	SwapChainDesc.BufferDesc.RefreshRate.Numerator = 60;
 	SwapChainDesc.BufferDesc.RefreshRate.Denominator = 1;
 
@@ -219,7 +222,7 @@ void Display::CopyToBackbuffer(void)
 {
 	m_DeviceContext->CopyResource(m_Texture.Get(), m_CPUTexture.Get());
 
-	m_DeviceContext->Dispatch(int(std::ceil(m_Width / 16) + 1), int(std::ceil(m_Height / 16) + 1), 1);
+	m_DeviceContext->Dispatch(int(std::ceil(m_SwapWidth / 16) + 1), int(std::ceil(m_SwapHeight / 16) + 1), 1);
 }
 
 void Display::Persent(void)

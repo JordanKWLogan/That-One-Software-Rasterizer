@@ -8,7 +8,7 @@ class Display
 {
 	public:
 
-	void CreateDevice(void* hwnd);
+	void CreateDevice(void* hwnd, uint32_t swapWidth, uint32_t swapHeight);
 	void CreateBuffers(uint32_t width, uint32_t height);
 	void CreateShader(void);
 	void CopyToBackbuffer(void);
@@ -24,6 +24,9 @@ class Display
 
 	uint32_t m_Width;
 	uint32_t m_Height;
+
+	uint32_t m_SwapWidth;
+	uint32_t m_SwapHeight;
 
 	D3D11_MAPPED_SUBRESOURCE      m_Map;
 

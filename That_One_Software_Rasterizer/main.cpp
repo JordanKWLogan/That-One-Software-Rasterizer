@@ -20,8 +20,8 @@ int WinMain(
 	wind.SetHInstance(hInstance);
 	wind.Initialize(800, 600);
 
-	dis.CreateDevice(wind.GetHWND());
-	dis.CreateBuffers(800, 600);
+	dis.CreateDevice(wind.GetHWND(), 800, 600);
+	dis.CreateBuffers(200, 100);
 	dis.CreateShader();
 
 	wind.ActivateWindow();
@@ -33,7 +33,7 @@ int WinMain(
 
 		dis.Clear(0,0,0);
 
-		rast.RenderTrinagle({ 10, 10 }, { 400, 240 }, { 10, 500 });
+		rast.RenderTrinagle({ 2, 2 }, { 40, 24 }, { 2, 50 });
 
 		dis.EndRender();
 
