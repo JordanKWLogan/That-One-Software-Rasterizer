@@ -2,7 +2,7 @@
 #include "Window.h"
 
 #define WINDOWS_LEAN_AND_MEAN
-#define NO_MIN_MAX
+#define NOMINMAX
 #include <Windows.h>
 
 static const wchar_t className[] = L"GameProjectWindowClass";

@@ -6,8 +6,12 @@
 
 #include <D3DCompiler.h>
 
+Display* g_NotGreatDisplay;
+
 void Display::CreateDevice(void* hwnd)
 {
+	g_NotGreatDisplay = this;
+
 	UINT createDeviceFlags = 0;
 
 #if (defined(DEBUG) || defined(_DEBUG))

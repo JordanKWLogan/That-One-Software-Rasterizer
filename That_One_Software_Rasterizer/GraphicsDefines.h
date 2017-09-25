@@ -1,3 +1,5 @@
+#define WINDOWS_LEAN_AND_MEAN
+#define NOMINMAX
 
 #include <d3d11.h>
 #include <DXGI1_2.h>

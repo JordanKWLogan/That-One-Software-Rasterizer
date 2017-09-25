@@ -4,6 +4,8 @@
 #include "Window.h"
 #include "Display.h"
 
+#include "Rasterizer.h"
+
 int WinMain(
 	HINSTANCE hInstance,
 	HINSTANCE /*hPrevInstance*/,
@@ -12,6 +14,8 @@ int WinMain(
 {
 	Window wind;
 	Display dis; // dis is the bomb
+
+	Rasterizer rast;
 
 	wind.SetHInstance(hInstance);
 	wind.Initialize(800, 600);
@@ -27,7 +31,9 @@ int WinMain(
 
 		dis.StartRender();
 
-		dis.Clear(126,8,8);
+		dis.Clear(0,0,0);
+
+		rast.RenderTrinagle({ 10, 10 }, { 10, 500 }, { 400, 240 });
 
 		dis.EndRender();
 

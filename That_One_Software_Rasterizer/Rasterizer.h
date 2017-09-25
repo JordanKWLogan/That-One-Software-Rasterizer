@@ -1,5 +1,21 @@
 #pragma once
 
+#include <stdint.h>
+
+
+struct IPoint2D
+{
+	using TYPE = int32_t;
+	union
+	{
+		struct
+		{
+			TYPE x;
+			TYPE y;
+		};
+		TYPE v[2];
+	};
+};
 
 class Rasterizer
 {
