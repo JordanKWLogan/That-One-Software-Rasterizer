@@ -39,6 +39,15 @@ constexpr IPoint2D max3(IPoint2D const& a, IPoint2D const& b, IPoint2D const& c)
 }
 
 
+// the fun orient function
+// https://fgiesen.wordpress.com/2013/02/08/triangle-rasterization-in-practice/
+constexpr int32_t orient2d(IPoint2D const& a, IPoint2D const& b, IPoint2D const& c)
+{
+	return (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x);
+}
+
+// fun idea. constexpr renderer
+
 // painful consts
 
 
@@ -49,15 +58,25 @@ void Rasterizer::RenderTrinagle(IPoint2D const& a, IPoint2D const& b, IPoint2D c
 	const IPoint2D minPoint = min3(a, b, c);
 	const IPoint2D maxPoint = max3(a, b, c); // DJ MAX POINT
 
+	// uhhh cliping may be a good idea
+	// or we could keep with the current way
+	// crash on out of bounds or memory corruption
+
 	// loop on Y
-	for(int32_t y = minPoint.y; y < maxPoint.y; ++y)
+	for(int32_t y = minPoint.y; y <= maxPoint.y; ++y)
 	{
 		// loop on x
-		for(int32_t x = minPoint.x; x < maxPoint.x; ++x)
+		for(int32_t x = minPoint.x; x <= maxPoint.x; ++x)
 		{
-			//if()
+			const IPoint2D p = { x, y };
+			// barycentric coordinates... illuminati confirmed
+			int32_t w0 = orient2d(b, c, p);
+			int32_t w1 = orient2d(c, a, p);
+			int32_t w2 = orient2d(a, b, p);
+
+			if(w0 >= 0 && w1 >= 0 && w2 >= 0)
 			{
-				RenderPixel(IPoint2D{ x, y });
+				RenderPixel(p);
 			}
 		}
 	}

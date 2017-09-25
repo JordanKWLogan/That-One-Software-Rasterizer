@@ -33,7 +33,7 @@ int WinMain(
 
 		dis.Clear(0,0,0);
 
-		rast.RenderTrinagle({ 10, 10 }, { 10, 500 }, { 400, 240 });
+		rast.RenderTrinagle({ 10, 10 }, { 400, 240 }, { 10, 500 });
 
 		dis.EndRender();
 
