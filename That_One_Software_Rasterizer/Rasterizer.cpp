@@ -18,6 +18,16 @@ constexpr int32_t max(int32_t a, int32_t b)
 	return (a > b) ? a : b;
 }
 
+constexpr IPoint2D min(IPoint2D a, IPoint2D b)
+{
+	return IPoint2D{ min(a.x, b.x), min(a.y, b.y) };
+}
+
+constexpr IPoint2D max(IPoint2D a, IPoint2D b)
+{
+	return IPoint2D{ max(a.x, b.x), max(a.y, b.y) };
+}
+
 constexpr int32_t min3(int32_t a, int32_t b, int32_t c)
 {
 	return min(a, min(b, c));
@@ -49,18 +59,20 @@ constexpr int32_t orient2d(IPoint2D const& a, IPoint2D const& b, IPoint2D const&
 // fun idea. constexpr renderer
 
 // painful consts
+const IPoint2D IPOINT2D_ZERO = { 0, 0 }; // yes this is a hack
+const IPoint2D SCREEN_SIZE = { 200, 100 }; // yes this is a hack
 
 
 void Rasterizer::RenderTrinagle(IPoint2D const& a, IPoint2D const& b, IPoint2D const& c)
 {
 	// edge set up
 
-	const IPoint2D minPoint = min3(a, b, c);
-	const IPoint2D maxPoint = max3(a, b, c); // DJ MAX POINT
+	IPoint2D minPoint = min3(a, b, c);
+	IPoint2D maxPoint = max3(a, b, c); // DJ MAX POINT
 
-	// uhhh cliping may be a good idea
-	// or we could keep with the current way
-	// crash on out of bounds or memory corruption
+	// fine we will clip these points with the view rect
+	minPoint = max(minPoint, IPOINT2D_ZERO);
+	maxPoint = min(maxPoint, SCREEN_SIZE);
 
 	// loop on Y
 	for(int32_t y = minPoint.y; y <= maxPoint.y; ++y)
