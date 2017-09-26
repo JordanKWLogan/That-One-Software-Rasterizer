@@ -5,6 +5,23 @@
 #include "Display.h"
 
 #include "Rasterizer.h"
+#include "VertexProcessor.h"
+
+
+#include <cmath>
+
+// time likes to float about
+float time;
+
+// should restrict some pointers at some point. they have too much FREEDOM
+void derpShader(uint8_t* inData, uint8_t* /*outData*/, Point4D& outPoint)
+{
+	// some level 20 template magic could help here
+	Point4D p = *reinterpret_cast<Point4D*>(inData);
+	p.x += sin(time) * 10;
+	outPoint = p;
+}
+
 
 int WinMain(
 	HINSTANCE hInstance,
@@ -16,6 +33,7 @@ int WinMain(
 	Display dis; // dis is the bomb
 
 	Rasterizer rast;
+	VertexProcessor vp;
 
 	wind.SetHInstance(hInstance);
 	wind.Initialize(800, 600);
@@ -25,6 +43,25 @@ int WinMain(
 	dis.CreateShader();
 
 	wind.ActivateWindow();
+
+	Point4D points[6] = {
+		{2,2,0,0},
+		{40,24,0,0},
+		{2,50,0,0},
+
+		{80,90,0,0},
+		{70, 40,0,0},
+		{150,25,0, 0}
+	};
+
+	VertexData data = {};
+	data.attributeCount = 1;
+	data.attributes[0].stride = sizeof(Point4D);
+	data.attributes[0].size = sizeof(Point4D);
+	data.streams[0] = reinterpret_cast<uint8_t*>(points);
+
+	time = 0;
+
 	while(1)
 	{
 		wind.Update();
@@ -33,12 +70,21 @@ int WinMain(
 
 		dis.Clear(0,0,0);
 
-		rast.RenderTrinagle({ 2, 2 }, { 40, 24 }, { 2, 50 });
+		vp.ProcessDataSteam(derpShader, 6, data);
+
+		for(int32_t i = 0; i < 2; ++i)
+			rast.RenderTrinagle(
+				IPoint2D{int32_t(vp.m_LocalVertexPositions[i * 3 + 0].x), int32_t(vp.m_LocalVertexPositions[i * 3 + 0].y)},
+				IPoint2D{int32_t(vp.m_LocalVertexPositions[i * 3 + 1].x), int32_t(vp.m_LocalVertexPositions[i * 3 + 1].y)},
+				IPoint2D{int32_t(vp.m_LocalVertexPositions[i * 3 + 2].x), int32_t(vp.m_LocalVertexPositions[i * 3 + 2].y)});
 
 		dis.EndRender();
 
 		dis.CopyToBackbuffer();
 
 		dis.Persent();
+
+		// super duper precise time measurement
+		time += 0.01f;
 	}
 }

@@ -30,6 +30,9 @@
     <ClCompile Include="Window.cpp">
       <Filter>Filter_of_things_noone_cares_about</Filter>
     </ClCompile>
+    <ClCompile Include="VertexProcessor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Rasterizer.h">
@@ -42,6 +45,12 @@
       <Filter>Filter_of_things_noone_cares_about</Filter>
     </ClInclude>
     <ClInclude Include="Window.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexProcessor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Point.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
