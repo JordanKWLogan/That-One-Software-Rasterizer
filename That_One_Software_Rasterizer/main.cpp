@@ -18,7 +18,7 @@ void derpShader(uint8_t* inData, uint8_t* /*outData*/, Point4D& outPoint)
 {
 	// some level 20 template magic could help here
 	Point4D p = *reinterpret_cast<Point4D*>(inData);
-	p.x += sin(time) * 10;
+	p.x += sin(time) * 10; // time is a sin. tasty time pi sin
 	outPoint = p;
 }
 
@@ -62,6 +62,7 @@ int WinMain(
 
 	time = 0;
 
+	// why would you ever want to leave the rasterizer
 	while(1)
 	{
 		wind.Update();
@@ -86,5 +87,6 @@ int WinMain(
 
 		// super duper precise time measurement
 		time += 0.01f;
+		// what i said percise not accurate
 	}
 }
