@@ -81,9 +81,8 @@ int WinMain(
 	{
 		wind.Update();
 
-		dis.StartRender();
-
-		dis.Clear(0,0,0);
+		const uint8_t clearColor[4] = { 0,0,0,0 };
+		color.Clear(clearColor);
 
 		vp.ProcessDataSteam(derpShader, 6, data);
 
@@ -92,6 +91,21 @@ int WinMain(
 				vp.m_LocalVertexPositions[i * 3 + 0],
 				vp.m_LocalVertexPositions[i * 3 + 1],
 				vp.m_LocalVertexPositions[i * 3 + 2]);
+
+
+
+		dis.StartRender();
+
+		// should really stop hard coding the viewport
+		for(int32_t y = 0; y < 100; ++y)
+		{
+			for(int32_t x = 0; x < 200; ++x)
+			{
+				uint8_t pixel[4];
+				color.ReadPixel(IPoint2D{ x, y }, pixel);
+				dis.SetPixel(pixel[0], pixel[1], pixel[1], x, y);
+			}
+		}
 
 		dis.EndRender();
 

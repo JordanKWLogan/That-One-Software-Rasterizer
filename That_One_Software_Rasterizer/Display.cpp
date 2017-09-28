@@ -6,14 +6,11 @@
 
 #include <D3DCompiler.h>
 
-Display* g_NotGreatDisplay;
 
 void Display::CreateDevice(void* hwnd, uint32_t swapWidth, uint32_t swapHeight)
 {
 	m_SwapWidth = swapWidth;
 	m_SwapHeight = swapHeight;
-
-	g_NotGreatDisplay = this;
 
 	UINT createDeviceFlags = 0;
 

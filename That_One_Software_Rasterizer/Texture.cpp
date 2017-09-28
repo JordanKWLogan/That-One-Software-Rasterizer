@@ -30,14 +30,30 @@ void Texture::DeleateTexture(void)
 	delete[] m_Data;
 }
 
-void Texture::SetPixel(IPoint2D const & point, void * data)
+void Texture::SetPixel(IPoint2D const & point, void const* data)
 {
-	uint32_t pitch = m_Desc.Width * DATA_FORMAT_SIZE[m_Desc.Format];
+	const uint32_t pitch = m_Desc.Width * DATA_FORMAT_SIZE[m_Desc.Format];
 	memcpy(m_Data + pitch * point.y + point.x * DATA_FORMAT_SIZE[m_Desc.Format], data, DATA_FORMAT_SIZE[m_Desc.Format]);
 }
 
-void Texture::ReadPixel(IPoint2D const & point, void * data)
+void Texture::ReadPixel(IPoint2D const & point, void * data) const
 {
-	uint32_t pitch = m_Desc.Width * DATA_FORMAT_SIZE[m_Desc.Format];
+	const uint32_t pitch = m_Desc.Width * DATA_FORMAT_SIZE[m_Desc.Format];
 	memcpy(data, m_Data + pitch * point.y + point.x * DATA_FORMAT_SIZE[m_Desc.Format], DATA_FORMAT_SIZE[m_Desc.Format]);
+}
+
+void Texture::Clear(void const * data)
+{
+	const uint32_t pitch = m_Desc.Width * DATA_FORMAT_SIZE[m_Desc.Format];
+
+	// later we will have lots of cool optimizations here
+	// for now just cry
+	for(uint32_t y = 0; y < m_Desc.Height; ++y)
+	{
+		for(uint32_t x = 0; x < m_Desc.Width; ++x)
+		{
+			memcpy(m_Data + pitch * y + x * DATA_FORMAT_SIZE[m_Desc.Format], data, DATA_FORMAT_SIZE[m_Desc.Format]);
+		}
+
+	}
 }

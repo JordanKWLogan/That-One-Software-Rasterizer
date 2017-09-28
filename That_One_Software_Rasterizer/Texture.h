@@ -34,10 +34,13 @@ class Texture
 
 	// will need to change this to account for 3D/mip/arrays
 	// Hoping im smart enough to always pass in the corrently sized data in the right format :/
-	void SetPixel(IPoint2D const& point, void* data);
+	void SetPixel(IPoint2D const& point, void const* data);
 
 	// same thing here. dont be dumb
-	void ReadPixel(IPoint2D const& point, void* data);
+	void ReadPixel(IPoint2D const& point, void* data) const;
+
+	// same thing here. dont be dumb
+	void Clear(void const* data);
 
 	private:
 

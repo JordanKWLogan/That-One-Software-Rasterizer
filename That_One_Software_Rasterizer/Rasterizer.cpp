@@ -3,9 +3,6 @@
 
 #include "Display.h" // for now
 
-// i know, i know. not great
-extern Display* g_NotGreatDisplay;
-
 
 // help funcs
 constexpr int32_t min(int32_t a, int32_t b)
@@ -122,5 +119,6 @@ void Rasterizer::RenderPixel(IPoint2D const& point, float z)
 	// should do something with this. like i dont know... use it to check if this triangle is in front of the current value
 	// yeah that sounds like a good idea
 	(void)z; // shut up mr compiler
-	g_NotGreatDisplay->SetPixel(255, 255, 255, point.x, point.y);
+	const uint8_t color[4] = { 255,255,255,0 };
+	m_ColorTexture->SetPixel(point, color);
 }
