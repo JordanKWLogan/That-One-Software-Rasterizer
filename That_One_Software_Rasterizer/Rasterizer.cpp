@@ -53,6 +53,11 @@ constexpr int32_t ftoi(float in)
 	return int32_t(in);
 }
 
+constexpr float itof(int32_t in)
+{
+	return float(in);
+}
+
 // the fun orient function
 // https://fgiesen.wordpress.com/2013/02/08/triangle-rasterization-in-practice/
 constexpr int32_t orient2d(IPoint2D const& a, IPoint2D const& b, IPoint2D const& c)
@@ -73,6 +78,10 @@ void Rasterizer::RenderTrinagle(Point4D const& v0, Point4D const& v1, Point4D co
 	const IPoint2D iv0 = { ftoi(v0.x), ftoi(v0.y) };
 	const IPoint2D iv1 = { ftoi(v1.x), ftoi(v1.y) };
 	const IPoint2D iv2 = { ftoi(v2.x), ftoi(v2.y) };
+
+	// [witty comment about how the area is something]
+	int32_t area = orient2d(iv0, iv1, iv2);
+	float oneOverArea = 1.0f / itof(area);
 
 	// edge set up
 	IPoint2D minPoint = min3(iv0, iv1, iv2);
@@ -96,8 +105,11 @@ void Rasterizer::RenderTrinagle(Point4D const& v0, Point4D const& v1, Point4D co
 
 			if(w0 >= 0 && w1 >= 0 && w2 >= 0)
 			{
-				//float z = ;
-				RenderPixel(p);
+				// SLOW MODE GOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+				float z = w0 * v0.w * oneOverArea
+						+ w1 * v1.w * oneOverArea
+						+ w2 * v2.w * oneOverArea;
+				RenderPixel(p, z);
 			}
 		}
 	}
@@ -105,7 +117,10 @@ void Rasterizer::RenderTrinagle(Point4D const& v0, Point4D const& v1, Point4D co
 
 
 // laster will take a mask
-void Rasterizer::RenderPixel(IPoint2D const& point)
+void Rasterizer::RenderPixel(IPoint2D const& point, float z)
 {
+	// should do something with this. like i dont know... use it to check if this triangle is in front of the current value
+	// yeah that sounds like a good idea
+	(void)z; // shut up mr compiler
 	g_NotGreatDisplay->SetPixel(255, 255, 255, point.x, point.y);
 }
