@@ -7,7 +7,7 @@
 #include "Rasterizer.h"
 #include "VertexProcessor.h"
 
-
+// i c math
 #include <cmath>
 
 // time likes to float about
@@ -75,9 +75,9 @@ int WinMain(
 
 		for(int32_t i = 0; i < 2; ++i)
 			rast.RenderTrinagle(
-				IPoint2D{int32_t(vp.m_LocalVertexPositions[i * 3 + 0].x), int32_t(vp.m_LocalVertexPositions[i * 3 + 0].y)},
-				IPoint2D{int32_t(vp.m_LocalVertexPositions[i * 3 + 1].x), int32_t(vp.m_LocalVertexPositions[i * 3 + 1].y)},
-				IPoint2D{int32_t(vp.m_LocalVertexPositions[i * 3 + 2].x), int32_t(vp.m_LocalVertexPositions[i * 3 + 2].y)});
+				vp.m_LocalVertexPositions[i * 3 + 0],
+				vp.m_LocalVertexPositions[i * 3 + 1],
+				vp.m_LocalVertexPositions[i * 3 + 2]);
 
 		dis.EndRender();
 

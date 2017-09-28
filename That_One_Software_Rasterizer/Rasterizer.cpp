@@ -48,6 +48,10 @@ constexpr IPoint2D max3(IPoint2D const& a, IPoint2D const& b, IPoint2D const& c)
 	return IPoint2D{ max3(a.x, b.x, c.x), max3(a.y, b.y, c.y) };
 }
 
+constexpr int32_t ftoi(float in)
+{
+	return int32_t(in);
+}
 
 // the fun orient function
 // https://fgiesen.wordpress.com/2013/02/08/triangle-rasterization-in-practice/
@@ -63,12 +67,16 @@ const IPoint2D IPOINT2D_ZERO = { 0, 0 }; // yes this is a hack
 const IPoint2D SCREEN_SIZE = { 200, 100 }; // yes this is a hack
 
 
-void Rasterizer::RenderTrinagle(IPoint2D const& a, IPoint2D const& b, IPoint2D const& c)
+void Rasterizer::RenderTrinagle(Point4D const& v0, Point4D const& v1, Point4D const& v2)
 {
-	// edge set up
+	// should center the pixels since we dont like alt left rendering (top left)
+	const IPoint2D iv0 = { ftoi(v0.x), ftoi(v0.y) };
+	const IPoint2D iv1 = { ftoi(v1.x), ftoi(v1.y) };
+	const IPoint2D iv2 = { ftoi(v2.x), ftoi(v2.y) };
 
-	IPoint2D minPoint = min3(a, b, c);
-	IPoint2D maxPoint = max3(a, b, c); // DJ MAX POINT
+	// edge set up
+	IPoint2D minPoint = min3(iv0, iv1, iv2);
+	IPoint2D maxPoint = max3(iv0, iv1, iv2); // DJ MAX POINT
 
 	// fine we will clip these points with the view rect
 	minPoint = max(minPoint, IPOINT2D_ZERO);
@@ -82,12 +90,13 @@ void Rasterizer::RenderTrinagle(IPoint2D const& a, IPoint2D const& b, IPoint2D c
 		{
 			const IPoint2D p = { x, y };
 			// barycentric coordinates... illuminati confirmed
-			int32_t w0 = orient2d(b, c, p);
-			int32_t w1 = orient2d(c, a, p);
-			int32_t w2 = orient2d(a, b, p);
+			int32_t w0 = orient2d(iv1, iv2, p);
+			int32_t w1 = orient2d(iv2, iv0, p);
+			int32_t w2 = orient2d(iv0, iv1, p);
 
 			if(w0 >= 0 && w1 >= 0 && w2 >= 0)
 			{
+				//float z = ;
 				RenderPixel(p);
 			}
 		}

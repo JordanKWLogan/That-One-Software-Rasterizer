@@ -6,7 +6,7 @@ class Rasterizer
 {
 	public:
 
-	void RenderTrinagle(IPoint2D const& a, IPoint2D const& b, IPoint2D const& c);
+	void RenderTrinagle(Point4D const& v0, Point4D const& v1, Point4D const& v2);
 
 
 	void RenderPixel(IPoint2D const& point);
