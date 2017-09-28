@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Point.h"
+#include "Texture.h"
 
 class Rasterizer
 {
@@ -10,6 +11,10 @@ class Rasterizer
 
 
 	void RenderPixel(IPoint2D const& point, float z);
+
+	// TODO BETTER CODE
+	Texture* m_DepthTexture;
+	Texture* m_ColorTexture;
 	private:
 	
 };

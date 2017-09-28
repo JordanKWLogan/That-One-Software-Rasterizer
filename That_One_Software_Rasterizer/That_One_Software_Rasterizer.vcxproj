@@ -75,6 +75,7 @@
     <ClCompile Include="Display.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Rasterizer.cpp" />
+    <ClCompile Include="Texture.cpp" />
     <ClCompile Include="VertexProcessor.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
@@ -83,6 +84,7 @@
     <ClInclude Include="GraphicsDefines.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Rasterizer.h" />
+    <ClInclude Include="Texture.h" />
     <ClInclude Include="VertexProcessor.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>

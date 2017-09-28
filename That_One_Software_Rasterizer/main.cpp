@@ -32,7 +32,21 @@ int WinMain(
 	Window wind;
 	Display dis; // dis is the bomb
 
+	Texture depth;
+	TextureDesc desc;
+	desc.Width = 200;
+	desc.Height = 100;
+	desc.Format = DATA_FORMAT::D32;
+	depth.CreateTexture(desc);
+
+	Texture color;
+	desc.Format = DATA_FORMAT::RGBA8;
+	color.CreateTexture(desc);
+
 	Rasterizer rast;
+	rast.m_ColorTexture = &color;
+	rast.m_DepthTexture = &depth;
+
 	VertexProcessor vp;
 
 	wind.SetHInstance(hInstance);
