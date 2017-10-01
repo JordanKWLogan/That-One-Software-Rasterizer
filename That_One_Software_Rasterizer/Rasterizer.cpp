@@ -64,17 +64,16 @@ constexpr int32_t orient2d(IPoint2D const& a, IPoint2D const& b, IPoint2D const&
 
 // fun idea. constexpr renderer
 
+
 // painful consts
 const IPoint2D IPOINT2D_ZERO = { 0, 0 }; // yes this is a hack
-const IPoint2D SCREEN_SIZE = { 200, 100 }; // yes this is a hack
-const IPoint2D SCREEN_SIZE1 = { 200 - 1, 100 - 1}; // yes this is a hack
 
 void Rasterizer::RenderTrinagle(Point4D const& v0, Point4D const& v1, Point4D const& v2)
 {
 	// should center the pixels since we dont like alt left rendering (top left)
-	const IPoint2D iv0 = { ftoi(v0.x * SCREEN_SIZE.x), ftoi(v0.y * SCREEN_SIZE.y) };
-	const IPoint2D iv1 = { ftoi(v1.x * SCREEN_SIZE.x), ftoi(v1.y * SCREEN_SIZE.y) };
-	const IPoint2D iv2 = { ftoi(v2.x * SCREEN_SIZE.x), ftoi(v2.y * SCREEN_SIZE.y) };
+	const IPoint2D iv0 = { ftoi(v0.x * m_Viewport.x), ftoi(v0.y * m_Viewport.y) };
+	const IPoint2D iv1 = { ftoi(v1.x * m_Viewport.x), ftoi(v1.y * m_Viewport.y) };
+	const IPoint2D iv2 = { ftoi(v2.x * m_Viewport.x), ftoi(v2.y * m_Viewport.y) };
 
 	// [witty comment about how the area is something]
 	int32_t area = orient2d(iv0, iv1, iv2);
@@ -86,7 +85,7 @@ void Rasterizer::RenderTrinagle(Point4D const& v0, Point4D const& v1, Point4D co
 
 	// fine we will clip these points with the view rect
 	minPoint = max(minPoint, IPOINT2D_ZERO);
-	maxPoint = min(maxPoint, SCREEN_SIZE1);
+	maxPoint = min(maxPoint, m_ViewportMinus1);
 
 	// loop on Y
 	for(int32_t y = minPoint.y; y <= maxPoint.y; ++y)
@@ -127,4 +126,10 @@ void Rasterizer::RenderPixel(IPoint2D const& point, float z)
 
 	// dont forget to set it. :D
 	m_DepthTexture->SetPixel(point, &z);
+}
+
+void Rasterizer::SetViewPort(IPoint2D const& point)
+{
+	m_Viewport = point;
+	m_ViewportMinus1 = IPoint2D{ point.x - 1, point.y - 1 };
 }

@@ -10,6 +10,9 @@
 // i c math
 #include <cmath>
 
+static int32_t SIZE_X = 200;
+static int32_t SIZE_Y = 100;
+
 // time likes to float about
 float time;
 
@@ -61,8 +64,8 @@ int WinMain(
 
 	Texture depth;
 	TextureDesc desc;
-	desc.Width = 200;
-	desc.Height = 100;
+	desc.Width = SIZE_X;
+	desc.Height = SIZE_Y;
 	desc.Format = DATA_FORMAT::D32;
 	depth.CreateTexture(desc);
 
@@ -74,13 +77,15 @@ int WinMain(
 	rast.m_ColorTexture = &color;
 	rast.m_DepthTexture = &depth;
 
+	rast.SetViewPort(IPoint2D{ SIZE_X, SIZE_Y });
+
 	VertexProcessor vp;
 
 	wind.SetHInstance(hInstance);
 	wind.Initialize(800, 600);
 
 	dis.CreateDevice(wind.GetHWND(), 800, 600);
-	dis.CreateBuffers(200, 100);
+	dis.CreateBuffers(SIZE_X, SIZE_Y);
 	dis.CreateShader();
 
 	wind.ActivateWindow();
@@ -105,7 +110,7 @@ int WinMain(
 	time = 0;
 
 
-	CreatePerspective(0.7f, 0.5f, 0.01f, 100);
+	CreatePerspective(0.7f, float(SIZE_Y) / SIZE_X, 0.01f, 100);
 
 	// why would you ever want to leave the rasterizer
 	while(1)
@@ -142,9 +147,9 @@ int WinMain(
 		dis.StartRender();
 
 		// should really stop hard coding the viewport
-		for(int32_t y = 0; y < 100; ++y)
+		for(int32_t y = 0; y < SIZE_Y; ++y)
 		{
-			for(int32_t x = 0; x < 200; ++x)
+			for(int32_t x = 0; x < SIZE_X; ++x)
 			{
 				uint8_t pixel[4];
 				color.ReadPixel(IPoint2D{ x, y }, pixel);
