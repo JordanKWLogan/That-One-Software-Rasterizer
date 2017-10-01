@@ -25,6 +25,13 @@ uint32_t VertexProcessor::ProcessDataSteam(VertexShader shader, uint32_t vertice
 		uint8_t* outData = m_LocalVertexStore + m_LVSPos;
 
 		shader(scratchData, outData, m_LocalVertexPositions[m_LVPPos]);
+
+		// lets get to NDC (Not dat coord)
+		m_LocalVertexPositions[m_LVPPos].x /= m_LocalVertexPositions[m_LVPPos].w;
+		m_LocalVertexPositions[m_LVPPos].y /= m_LocalVertexPositions[m_LVPPos].w;
+		m_LocalVertexPositions[m_LVPPos].z /= m_LocalVertexPositions[m_LVPPos].w;
+		m_LocalVertexPositions[m_LVPPos].w /= m_LocalVertexPositions[m_LVPPos].w;
+
 		++m_LVPPos;
 
 		// missing a very importent thing here

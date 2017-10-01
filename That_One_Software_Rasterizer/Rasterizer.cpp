@@ -67,14 +67,14 @@ constexpr int32_t orient2d(IPoint2D const& a, IPoint2D const& b, IPoint2D const&
 // painful consts
 const IPoint2D IPOINT2D_ZERO = { 0, 0 }; // yes this is a hack
 const IPoint2D SCREEN_SIZE = { 200, 100 }; // yes this is a hack
-
+const IPoint2D SCREEN_SIZE1 = { 200 - 1, 100 - 1}; // yes this is a hack
 
 void Rasterizer::RenderTrinagle(Point4D const& v0, Point4D const& v1, Point4D const& v2)
 {
 	// should center the pixels since we dont like alt left rendering (top left)
-	const IPoint2D iv0 = { ftoi(v0.x), ftoi(v0.y) };
-	const IPoint2D iv1 = { ftoi(v1.x), ftoi(v1.y) };
-	const IPoint2D iv2 = { ftoi(v2.x), ftoi(v2.y) };
+	const IPoint2D iv0 = { ftoi(v0.x * SCREEN_SIZE.x), ftoi(v0.y * SCREEN_SIZE.y) };
+	const IPoint2D iv1 = { ftoi(v1.x * SCREEN_SIZE.x), ftoi(v1.y * SCREEN_SIZE.y) };
+	const IPoint2D iv2 = { ftoi(v2.x * SCREEN_SIZE.x), ftoi(v2.y * SCREEN_SIZE.y) };
 
 	// [witty comment about how the area is something]
 	int32_t area = orient2d(iv0, iv1, iv2);
@@ -86,7 +86,7 @@ void Rasterizer::RenderTrinagle(Point4D const& v0, Point4D const& v1, Point4D co
 
 	// fine we will clip these points with the view rect
 	minPoint = max(minPoint, IPOINT2D_ZERO);
-	maxPoint = min(maxPoint, SCREEN_SIZE);
+	maxPoint = min(maxPoint, SCREEN_SIZE1);
 
 	// loop on Y
 	for(int32_t y = minPoint.y; y <= maxPoint.y; ++y)
@@ -103,9 +103,9 @@ void Rasterizer::RenderTrinagle(Point4D const& v0, Point4D const& v1, Point4D co
 			if(w0 >= 0 && w1 >= 0 && w2 >= 0)
 			{
 				// SLOW MODE GOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-				float z = w0 * v0.w * oneOverArea
-						+ w1 * v1.w * oneOverArea
-						+ w2 * v2.w * oneOverArea;
+				float z = w0 * v0.z * oneOverArea
+						+ w1 * v1.z * oneOverArea
+						+ w2 * v2.z * oneOverArea;
 				RenderPixel(p, z);
 			}
 		}
@@ -116,9 +116,15 @@ void Rasterizer::RenderTrinagle(Point4D const& v0, Point4D const& v1, Point4D co
 // laster will take a mask
 void Rasterizer::RenderPixel(IPoint2D const& point, float z)
 {
-	// should do something with this. like i dont know... use it to check if this triangle is in front of the current value
-	// yeah that sounds like a good idea
-	(void)z; // shut up mr compiler
-	const uint8_t color[4] = { 255,255,255,0 };
-	m_ColorTexture->SetPixel(point, color);
+	float pixelDepth;
+	m_DepthTexture->ReadPixel(point, &pixelDepth);
+
+	// hey look we use the depth. an't that nice
+	if(pixelDepth < z)
+		return;
+
+	m_ColorTexture->SetPixel(point, m_VERYTEMP_Color);
+
+	// dont forget to set it. :D
+	m_DepthTexture->SetPixel(point, &z);
 }

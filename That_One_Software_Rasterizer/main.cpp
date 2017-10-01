@@ -13,13 +13,40 @@
 // time likes to float about
 float time;
 
+// its nice to have a perspective of life
+Point4D perspective[4];
+
+void CreatePerspective(float fov, float aspect, float zn, float zf)
+{
+	const float yScale = 1 / tan(fov / 2);
+	float xScale = yScale * aspect;
+
+	perspective[0] = Point4D{ xScale,      0,                    0, 0 };
+	perspective[1] = Point4D{	   0, yScale,                    0, 0 };
+	perspective[2] = Point4D{      0,      0,       zf / (zf - zn), -zn * zf / (zf - zn) };
+	perspective[3] = Point4D{      0,      0, 1, 0 };
+}
+
+float dot(Point4D p0, Point4D p1)
+{
+	return p0.x * p1.x + p0.y * p1.y + p0.z * p1.z + p0.w * p1.w;
+}
+
 // should restrict some pointers at some point. they have too much FREEDOM
 void derpShader(uint8_t* inData, uint8_t* /*outData*/, Point4D& outPoint)
 {
 	// some level 20 template magic could help here
 	Point4D p = *reinterpret_cast<Point4D*>(inData);
 	p.x += sin(time) * 10; // time is a sin. tasty time pi sin
-	outPoint = p;
+
+	Point4D pOut;
+	// the best matrix multiplay ever
+	pOut.x = dot(perspective[0], p);
+	pOut.y = dot(perspective[1], p);
+	pOut.z = dot(perspective[2], p);
+	pOut.w = dot(perspective[3], p);
+
+	outPoint = pOut;
 }
 
 
@@ -59,13 +86,14 @@ int WinMain(
 	wind.ActivateWindow();
 
 	Point4D points[6] = {
-		{2,2,0,0},
-		{40,24,0,0},
-		{2,50,0,0},
 
-		{80,90,0,0},
-		{70, 40,0,0},
-		{150,25,0, 0}
+		{ 6,   2,  50, 1 },
+		{ 16,  5,  50, 1 },
+		{ 8,  10,  50, 1 },
+
+		{ 8,  9, 40, 1 },
+		{ 7,  4, 45, 1 },
+		{ 15, 2, 60, 1 },
 	};
 
 	VertexData data = {};
@@ -76,6 +104,9 @@ int WinMain(
 
 	time = 0;
 
+
+	CreatePerspective(0.7f, 0.5f, 0.01f, 100);
+
 	// why would you ever want to leave the rasterizer
 	while(1)
 	{
@@ -84,14 +115,28 @@ int WinMain(
 		const uint8_t clearColor[4] = { 0,0,0,0 };
 		color.Clear(clearColor);
 
+		const float clearDepth = 1;
+		depth.Clear(&clearDepth);
+
 		vp.ProcessDataSteam(derpShader, 6, data);
 
-		for(int32_t i = 0; i < 2; ++i)
-			rast.RenderTrinagle(
-				vp.m_LocalVertexPositions[i * 3 + 0],
-				vp.m_LocalVertexPositions[i * 3 + 1],
-				vp.m_LocalVertexPositions[i * 3 + 2]);
+		rast.m_VERYTEMP_Color[0] = 255;
+		rast.m_VERYTEMP_Color[1] = 0;
+		rast.m_VERYTEMP_Color[2] = 0;
+		rast.m_VERYTEMP_Color[3] = 255;
+		rast.RenderTrinagle(
+			vp.m_LocalVertexPositions[0 * 3 + 0],
+			vp.m_LocalVertexPositions[0 * 3 + 1],
+			vp.m_LocalVertexPositions[0 * 3 + 2]);
 
+		rast.m_VERYTEMP_Color[0] = 0;
+		rast.m_VERYTEMP_Color[1] = 255;
+		rast.m_VERYTEMP_Color[2] = 0;
+		rast.m_VERYTEMP_Color[3] = 255;
+		rast.RenderTrinagle(
+			vp.m_LocalVertexPositions[1 * 3 + 0],
+			vp.m_LocalVertexPositions[1 * 3 + 1],
+			vp.m_LocalVertexPositions[1 * 3 + 2]);
 
 
 		dis.StartRender();
