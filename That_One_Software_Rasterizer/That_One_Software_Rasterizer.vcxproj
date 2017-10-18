@@ -42,7 +42,12 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(SolutionDir);$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(SolutionDir);$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level4</WarningLevel>
@@ -80,6 +85,46 @@
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Assimp\ai_assert.h" />
+    <ClInclude Include="..\Assimp\anim.h" />
+    <ClInclude Include="..\Assimp\camera.h" />
+    <ClInclude Include="..\Assimp\cexport.h" />
+    <ClInclude Include="..\Assimp\cfileio.h" />
+    <ClInclude Include="..\Assimp\cimport.h" />
+    <ClInclude Include="..\Assimp\color4.h" />
+    <ClInclude Include="..\Assimp\Compiler\poppack1.h" />
+    <ClInclude Include="..\Assimp\Compiler\pstdint.h" />
+    <ClInclude Include="..\Assimp\Compiler\pushpack1.h" />
+    <ClInclude Include="..\Assimp\config.h" />
+    <ClInclude Include="..\Assimp\DefaultIOStream.h" />
+    <ClInclude Include="..\Assimp\DefaultIOSystem.h" />
+    <ClInclude Include="..\Assimp\DefaultLogger.hpp" />
+    <ClInclude Include="..\Assimp\Defines.h" />
+    <ClInclude Include="..\Assimp\defs.h" />
+    <ClInclude Include="..\Assimp\Exporter.hpp" />
+    <ClInclude Include="..\Assimp\Importer.hpp" />
+    <ClInclude Include="..\Assimp\importerdesc.h" />
+    <ClInclude Include="..\Assimp\IOStream.hpp" />
+    <ClInclude Include="..\Assimp\IOSystem.hpp" />
+    <ClInclude Include="..\Assimp\light.h" />
+    <ClInclude Include="..\Assimp\Logger.hpp" />
+    <ClInclude Include="..\Assimp\LogStream.hpp" />
+    <ClInclude Include="..\Assimp\material.h" />
+    <ClInclude Include="..\Assimp\matrix3x3.h" />
+    <ClInclude Include="..\Assimp\matrix4x4.h" />
+    <ClInclude Include="..\Assimp\mesh.h" />
+    <ClInclude Include="..\Assimp\metadata.h" />
+    <ClInclude Include="..\Assimp\NullLogger.hpp" />
+    <ClInclude Include="..\Assimp\postprocess.h" />
+    <ClInclude Include="..\Assimp\ProgressHandler.hpp" />
+    <ClInclude Include="..\Assimp\quaternion.h" />
+    <ClInclude Include="..\Assimp\scene.h" />
+    <ClInclude Include="..\Assimp\SceneCombiner.h" />
+    <ClInclude Include="..\Assimp\texture.h" />
+    <ClInclude Include="..\Assimp\types.h" />
+    <ClInclude Include="..\Assimp\vector2.h" />
+    <ClInclude Include="..\Assimp\vector3.h" />
+    <ClInclude Include="..\Assimp\version.h" />
     <ClInclude Include="Display.h" />
     <ClInclude Include="GraphicsDefines.h" />
     <ClInclude Include="Point.h" />
@@ -87,6 +132,19 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="VertexProcessor.h" />
     <ClInclude Include="Window.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Assimp\color4.inl" />
+    <None Include="..\Assimp\material.inl" />
+    <None Include="..\Assimp\matrix3x3.inl" />
+    <None Include="..\Assimp\matrix4x4.inl" />
+    <None Include="..\Assimp\quaternion.inl" />
+    <None Include="..\Assimp\vector2.inl" />
+    <None Include="..\Assimp\vector3.inl" />
+    <None Include="assimp-vc140-mt.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="..\Assimp\Lib\assimp-vc140-mt.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
