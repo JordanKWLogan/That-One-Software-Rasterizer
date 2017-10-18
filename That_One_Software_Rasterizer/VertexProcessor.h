@@ -36,7 +36,7 @@ class VertexProcessor
 
 	// at some point VertexData will be part of the state but not yet since it is still skeleton work here
 	// in other news the skeleton wars are coming
-	uint32_t ProcessDataSteam(VertexShader shader, uint32_t vertices, VertexData const& data);
+	uint32_t ProcessDataSteam(VertexShader shader, uint32_t vertices, uint32_t vertexOffset, VertexData const& data);
 
 	// This should not be public. I dont want people touching my privates but i keep leaving them out :P
 	uint8_t m_LocalVertexStore[LOCAL_VERTEX_STORE_SIZE];

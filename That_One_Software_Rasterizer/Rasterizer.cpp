@@ -3,6 +3,7 @@
 
 #include "Display.h" // for now
 
+#include <cfloat>
 
 // help funcs
 constexpr int32_t min(int32_t a, int32_t b)
@@ -70,6 +71,14 @@ const IPoint2D IPOINT2D_ZERO = { 0, 0 }; // yes this is a hack
 
 void Rasterizer::RenderTrinagle(Point4D const& v0, Point4D const& v1, Point4D const& v2)
 {
+	// lets get rid of those points behind us
+	if(v0.z > 1 || v1.z > 1 || v2.z > 1)
+		return;
+
+	// or in front
+	if(v0.z < 0 || v1.z < 0 || v2.z < 0)
+		return;
+
 	// should center the pixels since we dont like alt left rendering (top left)
 	const IPoint2D iv0 = { ftoi(v0.x * m_Viewport.x), ftoi(v0.y * m_Viewport.y) };
 	const IPoint2D iv1 = { ftoi(v1.x * m_Viewport.x), ftoi(v1.y * m_Viewport.y) };
@@ -78,6 +87,10 @@ void Rasterizer::RenderTrinagle(Point4D const& v0, Point4D const& v1, Point4D co
 	// [witty comment about how the area is something]
 	int32_t area = orient2d(iv0, iv1, iv2);
 	float oneOverArea = 1.0f / itof(area);
+
+	// get rid of the pesky zero area cases
+	if(area == 0)
+		return;
 
 	// edge set up
 	IPoint2D minPoint = min3(iv0, iv1, iv2);

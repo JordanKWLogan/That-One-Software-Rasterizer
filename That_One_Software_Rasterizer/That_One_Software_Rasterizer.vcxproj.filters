@@ -35,6 +35,9 @@
     <ClCompile Include="Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SceneImporter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Rasterizer.h">
@@ -177,6 +180,9 @@
     </ClInclude>
     <ClInclude Include="..\Assimp\Exporter.hpp">
       <Filter>Assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneImporter.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

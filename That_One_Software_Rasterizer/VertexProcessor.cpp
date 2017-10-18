@@ -3,7 +3,7 @@
 
 #include <cstring>
 
-uint32_t VertexProcessor::ProcessDataSteam(VertexShader shader, uint32_t vertices, VertexData const& data)
+uint32_t VertexProcessor::ProcessDataSteam(VertexShader shader, uint32_t vertices, uint32_t vertexOffset, VertexData const& data)
 {
 	m_LVSPos = 0; // later we wont do this.... I hope
 	m_LVPPos = 0; // should change the Very confussing names
@@ -16,7 +16,7 @@ uint32_t VertexProcessor::ProcessDataSteam(VertexShader shader, uint32_t vertice
 		{
 			Attribute const& att = data.attributes[j];
 
-			const uint32_t offset = att.stride * i;
+			const uint32_t offset = att.stride * (i + vertexOffset);
 			const uint8_t* stream = data.streams[att.stream];
 
 			memcpy(scratchData + att.offset, stream + offset, att.size);
