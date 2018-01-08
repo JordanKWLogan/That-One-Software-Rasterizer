@@ -11,7 +11,7 @@ bool ImportScene(std::string const & file, std::vector<Vertex>& outVerices, std:
 	Assimp::Importer importer;
 
 	// wow assimp half your stuff is in a namespace and the other half is prefixed with ai
-	uint32_t flags = aiPostProcessSteps::aiProcess_Triangulate ;
+	uint32_t flags = aiPostProcessSteps::aiProcess_Triangulate | aiProcess_ConvertToLeftHanded;
 
 	// as we all know by now. i have no creativity with names
 	aiScene const* scene = importer.ReadFile(file, flags);

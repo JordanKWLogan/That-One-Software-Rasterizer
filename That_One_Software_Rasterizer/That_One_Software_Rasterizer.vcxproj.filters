@@ -12,7 +12,7 @@
     <Filter Include="Filter_of_things_noone_cares_about">
       <UniqueIdentifier>{7409e89f-b4e1-4b68-93de-28763cd42b50}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Assimp">
+    <Filter Include="Filter_of_things_noone_cares_about\Assimp">
       <UniqueIdentifier>{1300ceec-fbe0-45ce-b06c-fc06fdcae261}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -62,124 +62,124 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\Assimp\Importer.hpp">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </ClInclude>
     <ClInclude Include="..\Assimp\types.h">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </ClInclude>
     <ClInclude Include="..\Assimp\importerdesc.h">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </ClInclude>
     <ClInclude Include="..\Assimp\IOStream.hpp">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </ClInclude>
     <ClInclude Include="..\Assimp\IOSystem.hpp">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </ClInclude>
     <ClInclude Include="..\Assimp\light.h">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </ClInclude>
     <ClInclude Include="..\Assimp\Logger.hpp">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </ClInclude>
     <ClInclude Include="..\Assimp\LogStream.hpp">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </ClInclude>
     <ClInclude Include="..\Assimp\material.h">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </ClInclude>
     <ClInclude Include="..\Assimp\matrix3x3.h">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </ClInclude>
     <ClInclude Include="..\Assimp\matrix4x4.h">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </ClInclude>
     <ClInclude Include="..\Assimp\mesh.h">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </ClInclude>
     <ClInclude Include="..\Assimp\metadata.h">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </ClInclude>
     <ClInclude Include="..\Assimp\NullLogger.hpp">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </ClInclude>
     <ClInclude Include="..\Assimp\postprocess.h">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </ClInclude>
     <ClInclude Include="..\Assimp\ProgressHandler.hpp">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </ClInclude>
     <ClInclude Include="..\Assimp\quaternion.h">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </ClInclude>
     <ClInclude Include="..\Assimp\scene.h">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </ClInclude>
     <ClInclude Include="..\Assimp\SceneCombiner.h">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </ClInclude>
     <ClInclude Include="..\Assimp\texture.h">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </ClInclude>
     <ClInclude Include="..\Assimp\vector2.h">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </ClInclude>
     <ClInclude Include="..\Assimp\vector3.h">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </ClInclude>
     <ClInclude Include="..\Assimp\version.h">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </ClInclude>
     <ClInclude Include="..\Assimp\Compiler\poppack1.h">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </ClInclude>
     <ClInclude Include="..\Assimp\Compiler\pstdint.h">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </ClInclude>
     <ClInclude Include="..\Assimp\Compiler\pushpack1.h">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </ClInclude>
     <ClInclude Include="..\Assimp\ai_assert.h">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </ClInclude>
     <ClInclude Include="..\Assimp\anim.h">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </ClInclude>
     <ClInclude Include="..\Assimp\camera.h">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </ClInclude>
     <ClInclude Include="..\Assimp\cexport.h">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </ClInclude>
     <ClInclude Include="..\Assimp\cfileio.h">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </ClInclude>
     <ClInclude Include="..\Assimp\cimport.h">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </ClInclude>
     <ClInclude Include="..\Assimp\color4.h">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </ClInclude>
     <ClInclude Include="..\Assimp\config.h">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </ClInclude>
     <ClInclude Include="..\Assimp\DefaultIOStream.h">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </ClInclude>
     <ClInclude Include="..\Assimp\DefaultIOSystem.h">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </ClInclude>
     <ClInclude Include="..\Assimp\DefaultLogger.hpp">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </ClInclude>
     <ClInclude Include="..\Assimp\Defines.h">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </ClInclude>
     <ClInclude Include="..\Assimp\defs.h">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </ClInclude>
     <ClInclude Include="..\Assimp\Exporter.hpp">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </ClInclude>
     <ClInclude Include="SceneImporter.h">
       <Filter>Header Files</Filter>
@@ -187,33 +187,33 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Assimp\material.inl">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </None>
     <None Include="..\Assimp\matrix3x3.inl">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </None>
     <None Include="..\Assimp\matrix4x4.inl">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </None>
     <None Include="..\Assimp\quaternion.inl">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </None>
     <None Include="..\Assimp\vector2.inl">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </None>
     <None Include="..\Assimp\vector3.inl">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </None>
     <None Include="..\Assimp\color4.inl">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </None>
     <None Include="assimp-vc140-mt.dll">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\Assimp\Lib\assimp-vc140-mt.lib">
-      <Filter>Assimp</Filter>
+      <Filter>Filter_of_things_noone_cares_about\Assimp</Filter>
     </Library>
   </ItemGroup>
 </Project>

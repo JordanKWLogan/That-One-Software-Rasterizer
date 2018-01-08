@@ -50,7 +50,7 @@ void CreateCamera(float x)
 #if 1
 	rotate[0] = Point4D{  cosX,  0,  sinX, 0 };
 	rotate[1] = Point4D{     0,  1,     0, -150 }; // move the world down.
-	rotate[2] = Point4D{ -sinX,  0,  cosX, 0 };
+	rotate[2] = Point4D{ -sinX,  0,  cosX, 300 };
 	rotate[3] = Point4D{  0,     0,     0, 1 };
 #endif
 
@@ -88,7 +88,7 @@ void derpShader(uint8_t* inData, uint8_t* /*outData*/, Point4D& outPoint)
 	pOut.z = dot(perspective[2], pRot);
 	pOut.w = dot(perspective[3], pRot);
 
-	pOut.y = -pOut.y;
+	//pOut.y = -pOut.y;
 
 	outPoint = pOut;
 }
@@ -171,16 +171,19 @@ int WinMain(
 			data.attributes[0].size = sizeof(Point4D);
 			data.streams[0] = reinterpret_cast<uint8_t*>(temp);
 
-			vp.ProcessDataSteam(derpShader, 3, 0, data);
+			uint32_t count = vp.ProcessDataSteam(derpShader, 3, 0, data);
 
 			rast.m_VERYTEMP_Color[0] = 255;
 			rast.m_VERYTEMP_Color[1] = 0;
 			rast.m_VERYTEMP_Color[2] = 0;
 			rast.m_VERYTEMP_Color[3] = 255;
-			rast.RenderTrinagle(
-				vp.m_LocalVertexPositions[0 * 3 + 0],
-				vp.m_LocalVertexPositions[0 * 3 + 1],
-				vp.m_LocalVertexPositions[0 * 3 + 2]);
+			for(uint32_t tri = 0; tri < count; tri += 3)
+			{
+				rast.RenderTriangle(
+					vp.m_LocalVertexPositions[tri + 0],
+					vp.m_LocalVertexPositions[tri + 1],
+					vp.m_LocalVertexPositions[tri + 2]);
+			}
 		}
 
 

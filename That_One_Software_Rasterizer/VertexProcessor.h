@@ -46,4 +46,6 @@ class VertexProcessor
 	uint32_t m_LVPPos;
 	private:
 
+	uint32_t Clip(uint32_t index);
+	uint32_t ClipW(uint32_t index);
 };
