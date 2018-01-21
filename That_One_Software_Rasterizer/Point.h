@@ -83,7 +83,7 @@ constexpr float lerp(float a, float b, float t)
 
 constexpr int32_t ftoi(float in)
 {
-	return int32_t(in);
+	return int32_t(in + 0.5f);
 }
 
 constexpr float itof(int32_t in)

@@ -50,7 +50,7 @@ void CreateCamera(float x)
 #if 1
 	rotate[0] = Point4D{  cosX,  0,  sinX, 0 };
 	rotate[1] = Point4D{     0,  1,     0, -150 }; // move the world down.
-	rotate[2] = Point4D{ -sinX,  0,  cosX, 300 };
+	rotate[2] = Point4D{ -sinX,  0,  cosX, 0 };
 	rotate[3] = Point4D{  0,     0,     0, 1 };
 #endif
 
@@ -137,7 +137,7 @@ int WinMain(
 	ImportScene("Sponza\\sponza.obj", verts, indices);
 
 
-	time = 0;
+	time = 2.2f;
 
 
 	CreatePerspective(1.0f, float(SIZE_Y) / SIZE_X, 0.1f, 1000);
